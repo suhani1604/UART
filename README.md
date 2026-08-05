@@ -25,20 +25,13 @@ Verification Environment
 
 The testbench follows a standard component-based structure:
 
-Component	  Role
-uart_if    	Interface bundling DUT signals for the testbench
-transaction 	Randomized data item (payload byte)
-generator	Produces a stream of randomized transactions
-driver	         Drives transactions onto the DUT via the interface
-monitor	          Samples DUT outputs after reception completes
-scoreboard	Compares transmitted vs. received data, reports pass/fail
-environment	Instantiates and connects generator, driver, monitor, scoreboard
-tb	         Top-level testbench: DUT instantiation, clock/reset, environment
+| Component | Role |
+|-----------|------|
+| `monitor` | Samples DUT outputs after UART reception completes |
+| `scoreboard` | Compares transmitted and received data, reports PASS/FAIL |
+| `environment` | Instantiates and connects generator, driver, monitor, and scoreboard |
+| `tb` | Top-level testbench that instantiates the DUT, generates clock/reset, and starts the verification environment |
 
-
-___________________________________________________________________________________________________________________________________________________________________
-tb	         Top-level testbench: DUT instantiation, clock/reset, environment
-___________________________________________________________________________________________________________________________________________________________________
 Communication between components uses SystemVerilog mailboxes. Each transaction generated is independently driven, monitored, and checked — the scoreboard flags a mismatch immediately if received data doesn't match what was sent.
 
 
