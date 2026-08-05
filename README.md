@@ -25,15 +25,15 @@ Verification Environment
 
 The testbench follows a standard component-based structure:
 
-Component	Role
-uart_if	Interface bundling DUT signals for the testbench
-transaction	Randomized data item (payload byte)
+Component	  Role
+uart_if    	Interface bundling DUT signals for the testbench
+transaction 	Randomized data item (payload byte)
 generator	Produces a stream of randomized transactions
-driver	Drives transactions onto the DUT via the interface
-monitor	Samples DUT outputs after reception completes
+driver	         Drives transactions onto the DUT via the interface
+monitor	          Samples DUT outputs after reception completes
 scoreboard	Compares transmitted vs. received data, reports pass/fail
 environment	Instantiates and connects generator, driver, monitor, scoreboard
-tb	Top-level testbench: DUT instantiation, clock/reset, environment
+tb	         Top-level testbench: DUT instantiation, clock/reset, environment
 
 
 ___________________________________________________________________________________________________________________________________________________________________
