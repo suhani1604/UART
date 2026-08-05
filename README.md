@@ -25,15 +25,23 @@ Verification Environment
 
 The testbench follows a standard component-based structure:
 
+## Verification Environment
+
+The testbench follows a standard component-based verification architecture.
+
 | Component | Role |
 |-----------|------|
+| `uart_if` | Interface bundling DUT signals for the testbench |
+| `transaction` | Randomized transaction object containing UART stimulus |
+| `generator` | Produces a stream of randomized transactions |
+| `driver` | Drives transactions onto the DUT through the virtual interface |
 | `monitor` | Samples DUT outputs after UART reception completes |
-| `scoreboard` | Compares transmitted and received data, reports PASS/FAIL |
-| `environment` | Instantiates and connects generator, driver, monitor, and scoreboard |
+| `scoreboard` | Compares transmitted and received data and reports PASS/FAIL |
+| `environment` | Instantiates and connects the generator, driver, monitor, and scoreboard |
 | `tb` | Top-level testbench that instantiates the DUT, generates clock/reset, and starts the verification environment |
 
 Communication between components uses SystemVerilog mailboxes. Each transaction generated is independently driven, monitored, and checked — the scoreboard flags a mismatch immediately if received data doesn't match what was sent.
-
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 
 Simulated on ModelSim/QuestaSim and EDA Playground, with waveform inspection via EPWave.
@@ -61,8 +69,9 @@ SystemVerilog Assertions (SVA) for protocol checks — start/stop bit timing, bi
 Negative/error-injection tests (framing errors, glitched start bit)
 Multi baud-rate support
 Migrate environment to UVM
-Author
 
-Suhani Deshmukh Electronics & Telecommunication Engineering Design Verification | VLSI
+Author
+Suhani Deshmukh
+Electronics & Telecommunication Engineering |Design Verification | VLSI
 
 Verilog SystemVerilog UVM Digital Design Verification
