@@ -44,6 +44,7 @@ Communication between components uses SystemVerilog mailboxes. Each transaction 
 
 
 Simulated on : ModelSim/QuestaSim and EDA Playground, with waveform inspection via EPWave.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 vlog RTL/UART.v TB/*.sv
 vsim -c tb -do "run -all"
@@ -53,6 +54,7 @@ GENERATOR -> DRIVER -> MONITOR -> SCOREBOARD
 SCB: PASS
 Expected = AC
 Actual   = AC
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Waveform
 <img width="1415" height="475" alt="uart waveform" src="https://github.com/user-attachments/assets/c18386b0-8331-46ce-aa87-461b37902b92" />
 
