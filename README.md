@@ -54,8 +54,9 @@ GENERATOR -> DRIVER -> MONITOR -> SCOREBOARD
 SCB: PASS
 Expected = AC
 Actual   = AC
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Waveform
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 <img width="1415" height="475" alt="uart waveform" src="https://github.com/user-attachments/assets/c18386b0-8331-46ce-aa87-461b37902b92" />
 
 
@@ -65,12 +66,7 @@ Waveform
 
 Signals of interest: clock, reset, start pulse, tx, rx, TX/RX FSM states, txdone, rxdone, received data byte.
 
-Next Steps
-Functional coverage (covergroups on data, baud config)
-SystemVerilog Assertions (SVA) for protocol checks — start/stop bit timing, bit ordering
-Negative/error-injection tests (framing errors, glitched start bit)
-Multi baud-rate support
-Migrate environment to UVM
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Author
