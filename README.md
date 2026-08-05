@@ -1,9 +1,10 @@
 UART Verification using SystemVerilog
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 A self-checking SystemVerilog testbench for a UART (Universal Asynchronous Receiver Transmitter), built around a mailbox-based verification environment with internal loopback checking.
 
 Overview
-
+___________________________________________________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________________________________________________
 This project implements a UART transmitter and receiver in Verilog RTL, and verifies them using a layered SystemVerilog testbench (Generator, Driver, Monitor, Scoreboard, Environment). The TX and RX modules are connected in loopback, so every byte driven into the transmitter is checked against what the receiver reconstructs.
 
 The goal was to build a complete, functioning verification flow end to end — from RTL through a randomized, self-checking environment — rather than just simulate a design and eyeball the waveform.
@@ -12,11 +13,12 @@ Design Under Test
 
 The UART is split into two independent blocks:
 
-Transmitter (TX) — converts 8-bit parallel data into a serial stream: 1 start bit, 8 data bits (LSB first), 1 stop bit. Asserts txdone on completion.
+1.Transmitter (TX) — converts 8-bit parallel data into a serial stream: 1 start bit, 8 data bits (LSB first), 1 stop bit. Asserts txdone on completion.
 
-Receiver (RX) — detects the start bit on the serial line, samples incoming bits at the configured baud rate, reconstructs the byte, and asserts rxdone once reception is complete.
+2.Receiver (RX) — detects the start bit on the serial line, samples incoming bits at the configured baud rate, reconstructs the byte, and asserts rxdone once reception is complete.
 
 Both blocks are driven by a parameterized baud-rate generator and run on independent FSMs, connected in loopback (tx → rx) for functional checking.
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
          
 Verification Environment
@@ -24,15 +26,23 @@ Verification Environment
 The testbench follows a standard component-based structure:
 
 Component	Role
-uart_if	Interface bundling DUT signals for the testbench
+___________________________________________________________________________________________________________________________________________________________________
+uart_if	         Interface bundling DUT signals for the testbench
+___________________________________________________________________________________________________________________________________________________________________
 transaction	Randomized data item (payload byte)
+__________________________________________________________________________________________________________________________________________________________________
 generator	Produces a stream of randomized transactions
-driver	Drives transactions onto the DUT via the interface
-monitor	Samples DUT outputs after reception completes
+___________________________________________________________________________________________________________________________________________________________________
+driver	         Drives transactions onto the DUT via the interface
+__________________________________________________________________________________________________________________________________________________________________
+monitor   	Samples DUT outputs after reception completes
+___________________________________________________________________________________________________________________________________________________________________
 scoreboard	Compares transmitted vs. received data, reports pass/fail
+___________________________________________________________________________________________________________________________________________________________________
 environment	Instantiates and connects generator, driver, monitor, scoreboard
-tb	Top-level testbench: DUT instantiation, clock/reset, environment
-
+___________________________________________________________________________________________________________________________________________________________________
+tb	         Top-level testbench: DUT instantiation, clock/reset, environment
+___________________________________________________________________________________________________________________________________________________________________
 Communication between components uses SystemVerilog mailboxes. Each transaction generated is independently driven, monitored, and checked — the scoreboard flags a mismatch immediately if received data doesn't match what was sent.
 
 
