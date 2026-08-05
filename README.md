@@ -26,9 +26,7 @@ Verification Environment
 
 The testbench follows a standard component-based structure:
 
-## Verification Environment
 
-The testbench follows a standard component-based verification architecture.
 
 | Component | Role |
 |-----------|------|
