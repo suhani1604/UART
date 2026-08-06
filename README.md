@@ -76,4 +76,9 @@ Suhani Deshmukh
 
 Electronics & Telecommunication Engineering Student |Design Verification | VLSI
 
- Skills:Verilog SystemVerilog UVM Digital Design Verification
+ Skills
+ ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Verilog
+ SystemVerilog
+ UVM
+ Digital Design Verification
