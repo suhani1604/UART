@@ -74,6 +74,6 @@ Author
 
 Suhani Deshmukh
 
-Electronics & Telecommunication Engineering |Design Verification | VLSI
+Electronics & Telecommunication Engineering Student |Design Verification | VLSI
 
  Skills:Verilog SystemVerilog UVM Digital Design Verification
