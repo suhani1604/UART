@@ -72,9 +72,12 @@ Signals of interest: clock, reset, start pulse, tx, rx, TX/RX FSM states, txdone
 Author
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Suhani Deshmukh
+Suhani Deshmukh    
+
 suhani.deshmukh1612@gmail.com
+
 7387568151
+
 Electronics & Telecommunication Engineering Student |Design Verification | VLSI
 
  Skills
