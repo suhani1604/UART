@@ -55,13 +55,13 @@ SCB: PASS
 Expected = AC
 Actual   = AC
 
-Waveform
+Waveform (EPWave screenshot — Waveform/uart_waveform)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 <img width="1415" height="475" alt="uart waveform" src="https://github.com/user-attachments/assets/c18386b0-8331-46ce-aa87-461b37902b92" />
 
 
 
-(EPWave screenshot — Waveform/uart_waveform.png)
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Signals of interest: clock, reset, start pulse, tx, rx, TX/RX FSM states, txdone, rxdone, received data byte.
@@ -73,7 +73,8 @@ Author
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Suhani Deshmukh
-
+suhani.deshmukh1612@gmail.com
+7387568151
 Electronics & Telecommunication Engineering Student |Design Verification | VLSI
 
  Skills
