@@ -1,0 +1,32 @@
+
+
+//==================================================
+// TRANSACTION
+//==================================================
+
+class uart_transaction extends uvm_sequence_item;
+
+  `uvm_object_utils(uart_transaction)
+
+  rand bit       start;
+  rand bit [7:0] txin;
+
+  bit       tx;
+  bit       rx;
+  bit [7:0] rxout;
+  bit       txdone;
+  bit       rxdone;
+
+
+  constraint start_c {
+    start == 1'b1;
+  }
+
+
+  function new(string name = "uart_transaction");
+    super.new(name);
+  endfunction
+
+endclass
+
+
