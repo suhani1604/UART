@@ -1,0 +1,53 @@
+
+//==================================================
+// SCOREBOARD
+//==================================================
+
+class uart_scoreboard extends uvm_scoreboard;
+
+  `uvm_component_utils(uart_scoreboard)
+
+  uvm_analysis_imp #(uart_transaction,
+                     uart_scoreboard) analysis_export;
+
+
+  function new(string name = "uart_scoreboard",
+               uvm_component parent);
+
+    super.new(name, parent);
+
+    analysis_export =
+      new("analysis_export", this);
+
+  endfunction
+
+
+  function void write(uart_transaction tr);
+
+    if(tr.txin == tr.rxout)
+    begin
+
+      `uvm_info("SCB",
+                $sformatf(
+                  "PASS : TXIN = %0h  RXOUT = %0h",
+                  tr.txin,
+                  tr.rxout
+                ),
+                UVM_LOW)
+
+    end
+    else
+    begin
+
+      `uvm_error("SCB",
+                 $sformatf(
+                   "FAIL : TXIN = %0h  RXOUT = %0h",
+                   tr.txin,
+                   tr.rxout
+                 ))
+
+    end
+
+  endfunction
+
+endclass
