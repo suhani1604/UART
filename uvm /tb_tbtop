@@ -1,0 +1,96 @@
+module tb_top;
+
+  import uvm_pkg::*;
+
+
+  //================================================
+  // CLOCK
+  //================================================
+
+  logic clk;
+
+  initial begin
+    clk = 0;
+  end
+
+  always #5 clk = ~clk;
+
+
+  //================================================
+  // INTERFACE
+  //================================================
+
+  uart_if intf(clk);
+
+
+  //================================================
+  // DUT
+  //================================================
+
+  UART dut (
+
+    .clk    (clk),
+    .rst    (intf.rst),
+
+    .start  (intf.start),
+    .txin   (intf.txin),
+
+    .tx     (intf.tx),
+    .rx     (intf.rx),
+
+    .rxout  (intf.rxout),
+    .txdone (intf.txdone),
+    .rxdone (intf.rxdone)
+
+  );
+
+
+  //================================================
+  // INTERNAL LOOPBACK
+  //================================================
+
+  assign intf.rx = intf.tx;
+
+
+  //================================================
+  // RESET
+  //================================================
+
+  initial begin
+
+    intf.rst   = 1'b1;
+    intf.start = 1'b0;
+    intf.txin  = 8'h00;
+
+    #20;
+
+    intf.rst = 1'b0;
+
+  end
+//==================================================
+// WAVEFORM
+//==================================================
+
+initial begin
+  $dumpfile("uart_uvm.vcd");
+  $dumpvars(0, tb_top);
+end
+
+  //================================================
+  // UVM CONFIGURATION
+  //================================================
+
+  initial begin
+
+    uvm_config_db#(virtual uart_if)::set(
+      null,
+      "*",
+      "vif",
+      intf
+    );
+
+    run_test("uart_test");
+
+  end
+
+endmodule
