@@ -15,3 +15,96 @@ class uart_driver extends uvm_driver #(uart_transaction);
                uvm_component parent);
     super.new(name, parent);
   endfunction
+
+
+  //================================================
+  // BUILD PHASE
+  //================================================
+
+  function void build_phase(uvm_phase phase);
+
+    super.build_phase(phase);
+
+    if(!uvm_config_db#(virtual uart_if)::get(
+          this,
+          "",
+          "vif",
+          vif
+        ))
+      `uvm_fatal("DRV", "Virtual Interface Not Found")
+
+  endfunction
+
+
+  //================================================
+  // RUN PHASE
+  //================================================
+
+  task run_phase(uvm_phase phase);
+
+    // Wait for reset to be released
+    wait(vif.rst == 1'b0);
+
+    `uvm_info("DRV",
+              "Reset released. Driver starting...",
+              UVM_LOW)
+
+
+    forever begin
+
+      // Get transaction
+      seq_item_port.get_next_item(req);
+
+      `uvm_info("DRV",
+                $sformatf("Driving TXIN = %0h",
+                          req.txin),
+                UVM_LOW)
+
+
+      // Drive transaction
+      @(posedge vif.clk);
+
+      vif.start <= req.start;
+      vif.txin  <= req.txin;
+
+      `uvm_info("DRV",
+                $sformatf("START=%0b TXIN=%0h",
+                          req.start,
+                          req.txin),
+                UVM_LOW)
+
+
+      // Keep start high for one clock
+      @(posedge vif.clk);
+
+      vif.start <= 1'b0;
+
+
+      // Wait for transmitter to finish
+      `uvm_info("DRV",
+                "Waiting for TXDONE...",
+                UVM_LOW)
+
+      @(posedge vif.txdone);
+
+
+      `uvm_info("DRV",
+                "TXDONE received",
+                UVM_LOW)
+
+
+      // Tell sequencer transaction is complete
+      seq_item_port.item_done();
+
+
+      `uvm_info("DRV",
+                "Transaction completed",
+                UVM_LOW)
+
+    end
+
+  endtask
+
+endclass
+
+
