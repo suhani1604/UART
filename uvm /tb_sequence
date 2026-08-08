@@ -1,0 +1,37 @@
+
+
+//==================================================
+// SEQUENCE
+//==================================================
+
+class uart_sequence extends uvm_sequence #(uart_transaction);
+
+  `uvm_object_utils(uart_sequence)
+
+  uart_transaction tr;
+
+
+  function new(string name = "uart_sequence");
+    super.new(name);
+  endfunction
+
+
+  task body();
+
+    repeat(10)
+    begin
+
+      tr = uart_transaction::type_id::create("tr");
+
+      start_item(tr);
+
+      if(!tr.randomize())
+        `uvm_error("SEQ", "Randomization Failed")
+
+      finish_item(tr);
+
+    end
+
+  endtask
+
+endclass
