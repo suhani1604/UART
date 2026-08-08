@@ -1,0 +1,25 @@
+///interface///
+
+`timescale 1ns/1ps
+
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+
+
+interface uart_if(input logic clk);
+
+  logic rst;
+
+  logic start;
+  logic [7:0] txin;
+
+  logic tx;
+  logic rx;
+
+  logic [7:0] rxout;
+
+  logic txdone;
+  logic rxdone;
+
+endinterface
+
