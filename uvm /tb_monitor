@@ -1,0 +1,25 @@
+
+
+//==================================================
+// MONITOR
+//==================================================
+
+class uart_monitor extends uvm_monitor;
+
+  `uvm_component_utils(uart_monitor)
+
+  virtual uart_if vif;
+
+  uart_transaction tr;
+
+  uvm_analysis_port #(uart_transaction) ap;
+
+
+  function new(string name = "uart_monitor",
+               uvm_component parent);
+
+    super.new(name, parent);
+
+    ap = new("ap", this);
+
+  endfunction
