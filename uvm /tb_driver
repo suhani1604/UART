@@ -1,0 +1,17 @@
+
+//==================================================
+// DRIVER
+//==================================================
+
+class uart_driver extends uvm_driver #(uart_transaction);
+
+  `uvm_component_utils(uart_driver)
+
+  virtual uart_if vif;
+  uart_transaction req;
+
+
+  function new(string name = "uart_driver",
+               uvm_component parent);
+    super.new(name, parent);
+  endfunction
